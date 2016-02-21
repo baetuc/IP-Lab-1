@@ -58,15 +58,23 @@ string Restantier::getTip() {
 	return "Restantier";
 }
 
-void Restantier::printInfo(ostream &ostr)
+void Restantier::printInfo(ostream &ostr, int deplasament)
 {
+	Utility::printHeader(ostr, deplasament);
 	ostr << "----------------------------------\n";
+	Utility::printHeader(ostr, deplasament);
 	ostr << "Student restantier\n";
+	Utility::printHeader(ostr, deplasament);
 	ostr << "ID: " << ID << '\n';
+	Utility::printHeader(ostr, deplasament);
 	ostr << "Nume: " << nume << '\n';
-	ostr << "Preume: " << prenume << '\n';
+	Utility::printHeader(ostr, deplasament);
+	ostr << "Prenume: " << prenume << '\n';
+	Utility::printHeader(ostr, deplasament);
 	ostr << "An de studiu: " << an << '\n';
+	Utility::printHeader(ostr, deplasament);
 	ostr << "Grupa: " << grupa << '\n';
+	Utility::printHeader(ostr, deplasament);
 	ostr << "Are restante la obiectele: ";
 	list<string>::iterator it;
 	for (it = obiecte.begin(); it != obiecte.end(); ++it)
@@ -74,6 +82,7 @@ void Restantier::printInfo(ostream &ostr)
 		ostr << (*it)<<' ';
 	}
 	ostr << '\n';
+	Utility::printHeader(ostr, deplasament);
 	ostr << "----------------------------------\n";
 }
 

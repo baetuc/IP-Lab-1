@@ -56,17 +56,27 @@ string Integralist::getTip() {
 	return "Integralist";
 }
 
-void Integralist::printInfo(ostream &ostr)
+void Integralist::printInfo(ostream &ostr, int deplasament)
 {
-	ostr<<"----------------------------------\n";
+	Utility::printHeader(ostr, deplasament);
+	ostr<<"----------------------------------\n"; 
+	Utility::printHeader(ostr, deplasament);
 	ostr << "Student integralist\n";
-	ostr << "ID: " << ID<<'\n';
+	Utility::printHeader(ostr, deplasament);
+	ostr << "ID: " << ID<<'\n'; 
+	Utility::printHeader(ostr, deplasament);
 	ostr << "Nume: " << nume << '\n';
+	Utility::printHeader(ostr, deplasament);
 	ostr << "Preume: " << prenume << '\n';
+	Utility::printHeader(ostr, deplasament);
 	ostr << "An de studiu: " << an << '\n';
+	Utility::printHeader(ostr, deplasament);
 	ostr << "Grupa: " << grupa << '\n';
+	Utility::printHeader(ostr, deplasament);
 	ostr << "Medie: " << media << '\n';
+	Utility::printHeader(ostr, deplasament);
 	ostr << "Bursa: " << bursa << '\n';
+	Utility::printHeader(ostr, deplasament);
 	ostr << "----------------------------------\n";
 }
 

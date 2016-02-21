@@ -104,8 +104,9 @@ int main()
 	Manager manager;
 	manager.deserializeazaFisier(fstr);
 	//manager.serializeazaFisier(cout);
-	manager.printInfo(1000);
-	manager.stergeStudent(1000);
+	manager.printInfo(4);
+	//manager.stergeStudent(1001);
 	//manager.printInfo(1000);
-	manager.serializeazaFisier(cout); 
+	//manager.serializeazaFisier(cout); 
+	return 0;
 }

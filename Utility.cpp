@@ -40,3 +40,12 @@ void Utility::valideazaSfarsitObiect(istream &istr) {
 		throw "Eroare la deserializarea din fisier: '#' missing.";
 	}
 }
+
+void Utility::printHeader(ostream & ostr, int deplasament)
+{
+	ostr << "| ";
+	for (int i = 0; i < deplasament; ++i)
+	{
+		ostr << "\t| ";
+	}
+}

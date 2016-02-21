@@ -73,6 +73,19 @@ void SefAn::setSubordonati(list<SefGrupa*> subordonati)
 	this->subordonati = subordonati;
 }
 
+void SefAn::printInfo(ostream& ostr, int deplasament)
+{
+	list<SefGrupa*>::iterator it;
+	Utility::printHeader(ostr, deplasament);
+	ostr << "Sef de an pentru studentii:\n";
+	for (it = subordonati.begin(); it != subordonati.end(); ++it)
+	{
+		Utility::printHeader(ostr, deplasament + 1);
+		ostr << (*it)->getStudent()->getID() << '\n' ;
+		(*it)->printInfo(ostr, deplasament + 1);
+	}
+}
+
 extern map<string, map<int, pair<Serializabil*, bool>>> obiecteCreateDinClasa;
 extern map<string, string> tipulTipului;
 typedef Serializabil* (*CreareObiect)();

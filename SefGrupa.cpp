@@ -52,7 +52,17 @@ void SefGrupa::deserializeaza(istream& istr, int ID) {
 	Utility::valideazaSfarsitObiect(istr);
 }
 
-
+void SefGrupa::printInfo(ostream& ostr, int deplasament)
+{
+	list<Student*>::iterator it;
+	Utility::printHeader(ostr, deplasament);
+	ostr << "Sef de grupa pentru studentii:\n";
+	for (it = subordonati.begin(); it != subordonati.end(); ++it)
+	{
+		Utility::printHeader(ostr, deplasament + 1);
+		ostr << (*it)->getID() << '\n';
+	}
+}
 
 
 extern map<string, map<int, pair<Serializabil*, bool>>> obiecteCreateDinClasa;

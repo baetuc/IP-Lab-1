@@ -5,6 +5,7 @@
 #include"Utility.h"
 #include"Integralist.h"
 #include"Restantier.h"
+#include"Responsabil.h"
 
 using namespace std;
 
@@ -79,6 +80,14 @@ void Manager::adaugaStudenti(istream& istr) {
 		if (obiecteCreateDinClasa["Responsabil"].size() != 1) {
 			throw ("Eroare la deserializare fisier: not exactly one responsible for students.");
 		}
+		
+		list<Student*> subordonati;
+		map<int, pair<Serializabil*, bool>>::iterator it2;
+		for (it2 = obiecteCreateDinClasa["Student"].begin(); it2 != obiecteCreateDinClasa["Student"].end(); ++it2)
+		{
+			subordonati.push_back((Student*)it2->second.first);
+		}
+		((Responsabil*)obiecteCreateDinClasa["Responsabil"].begin()->second.first)->setSubordonati(subordonati);
 	}
 	catch (const char* mesaj)
 	{
@@ -114,6 +123,18 @@ void Manager::stergeStudent(int ID) {
 		{
 			throw "Eroare la stergeStudent: student with specified ID doesn't exist.";
 		}
+
+		if (obiecteCreateDinClasa["Responsabil"].size() != 1) {
+			throw ("Eroare la deserializare fisier: cannot remove responsible.");
+		}
+
+		list<Student*> subordonati;
+		map<int, pair<Serializabil*, bool>>::iterator it2;
+		for (it2 = obiecteCreateDinClasa["Student"].begin(); it2 != obiecteCreateDinClasa["Student"].end(); ++it2)
+		{
+			subordonati.push_back((Student*)it2->second.first);
+		}
+		((Responsabil*)obiecteCreateDinClasa["Responsabil"].begin()->second.first)->setSubordonati(subordonati);
 	}
 	catch (const char* mesaj)
 	{
@@ -126,7 +147,18 @@ void Manager::printInfo(int ID) {
 	try {
 		if (obiecteCreateDinClasa["Student"].find(ID) != obiecteCreateDinClasa["Student"].end())
 		{
-			((Student*)(obiecteCreateDinClasa["Student"][ID].first))->printInfo(cout);
+			((Student*)(obiecteCreateDinClasa["Student"][ID].first))->printInfo(cout,0);
+			map<string, map<int, pair<Serializabil*, bool>>>::iterator it;
+			for (it = obiecteCreateDinClasa.begin(); it!=obiecteCreateDinClasa.end(); ++it)
+			{
+				if ((*it).first != "Student")
+				{
+					if ((*it).second.find(ID) != (*it).second.end())
+					{
+						(*it).second[ID].first->printInfo(cout, 0);
+					}
+				}
+			}
 		}
 		else
 		{

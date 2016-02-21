@@ -11,7 +11,7 @@ public:
 	double getBursa();
 	void setMedia(double media);
 	void setBursa(double bursa);
-	virtual void printInfo(ostream &ostr);
+	virtual void printInfo(ostream &ostr, int deplasament);
 
 	virtual void serializeaza(ostream& ostr);
 	virtual void deserializeaza(istream& istr, int ID);

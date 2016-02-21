@@ -12,6 +12,7 @@ public:
 	list<Student*> getSubordonati();
 	void setSubordonati(list<Student*> subordonati);
 
+	virtual void printInfo(ostream& ostr, int deplasament);
 	virtual void serializeaza(ostream &ostr);
 	virtual void deserializeaza(istream &istr, int ID);
 };
