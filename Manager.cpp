@@ -26,6 +26,9 @@ void Manager::serializeazaFisier(ostream& ostr) {
 }
 
 void Manager::adaugaStudenti(istream& istr) {
+	// tinem o copie a managerului initial...
+	map<string, map<int, pair<Serializabil*, bool>>> copieObiecteCreateDinClasa = obiecteCreateDinClasa;
+
 	try
 	{
 		while (true) {
@@ -92,12 +95,11 @@ void Manager::adaugaStudenti(istream& istr) {
 	catch (const char* mesaj)
 	{
 		cout << mesaj << '\n';
-		exit(1);
+		obiecteCreateDinClasa = copieObiecteCreateDinClasa;
 	}
 }
 
 void Manager::deserializeazaFisier(istream& istr) {
-	//obiecteCreateDinClasa.clear();
 	map<string, map<int, pair<Serializabil*, bool>>>::iterator it;
 	for (it = obiecteCreateDinClasa.begin(); it != obiecteCreateDinClasa.end(); ++it)
 	{
@@ -107,13 +109,14 @@ void Manager::deserializeazaFisier(istream& istr) {
 }
 
 void Manager::stergeStudent(int ID) {
+	map<string, map<int, pair<Serializabil*, bool>>> copieObiecteCreateDinClasa = obiecteCreateDinClasa;
 	try {
 		bool ok = false;
 		map<string, map<int, pair<Serializabil*, bool>>>::iterator it;
 		for (it = obiecteCreateDinClasa.begin(); it != obiecteCreateDinClasa.end(); ++it) {
 			map<int, pair<Serializabil*, bool>> &obiecteCreate = it->second;
 			map<int, pair<Serializabil*, bool>>::iterator it2 = obiecteCreate.find(ID);
-			if (it2 != obiecteCreate.end())
+			if (it2 != obiecteCreate.end()) 
 			{
 				ok = true;
 				obiecteCreate.erase(it2);
@@ -139,7 +142,7 @@ void Manager::stergeStudent(int ID) {
 	catch (const char* mesaj)
 	{
 		cout << mesaj << '\n';
-		exit(1);
+		obiecteCreateDinClasa = copieObiecteCreateDinClasa;
 	}
 }
 
@@ -168,6 +171,5 @@ void Manager::printInfo(int ID) {
 	catch (const char* mesaj)
 	{
 		cout << mesaj << '\n';
-		exit(1);
 	}
 }
